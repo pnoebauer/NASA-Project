@@ -17,8 +17,8 @@ app.use(
 );
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '..', 'public'))); //serves public folder (e.g. index.html on /index.html)
-app.use(planetsRouter);
-app.use(launchesRouter);
+app.use('/planets', planetsRouter);
+app.use('/launches', launchesRouter);
 
 // serves everything where requested route is not setup on express
 // app.use((req, res) => {
