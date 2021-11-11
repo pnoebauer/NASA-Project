@@ -21,6 +21,7 @@ function httpAddNewLaunch(req, res) {
 	}
 
 	launch.launchDate = new Date(launch.launchDate);
+
 	// if (launch.launchDate.toString() === 'Invalid Date') {
 	//isNaN(launch.launchDate.valueOf()) in the background (if valid, valueOf will return ms unix format)
 	if (isNaN(launch.launchDate)) {
@@ -28,6 +29,7 @@ function httpAddNewLaunch(req, res) {
 			error: 'Invalid launch date',
 		});
 	}
+
 	addNewLaunch(launch);
 
 	return res.status(201).json(launch);
