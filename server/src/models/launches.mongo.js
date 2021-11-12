@@ -10,3 +10,8 @@ const launchesSchema = new mongoose.Schema({
 	upcoming: {type: Boolean, required: true},
 	success: {type: Boolean, required: true, default: true},
 });
+
+// Connects launchesSchema with "launches" collection
+// Note: the first argument is the singular name of the collection your model is for.
+// Mongoose automatically looks for the plural, lowercased version of your model name
+module.exports = mongoose.model('Launch', launchesSchema);
