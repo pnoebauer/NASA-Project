@@ -1,21 +1,23 @@
-const mongoose = require('mongoose');
-require('dotenv').config();
+const request = require('supertest');
+
+const {mongoConnect, mongoDisconnect} = require('../services/mongo');
 
 const {getAllLaunches} = require('./launches.model');
 
-const MONGO_URL = `mongodb+srv://nasa-api:${process.env.MONGODB_PASS}@nasacluster.oo9lj.mongodb.net/nasa?retryWrites=true&w=majority`;
-
-beforeAll(async () => {
-	await mongoose.connect(MONGO_URL, {
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
+describe('Launches Model Unit Tests', () => {
+	beforeAll(async () => {
+		await mongoConnect();
 	});
-});
 
-describe('test launches model', () => {
-	test('allLaunches', async () => {
-		const allLaunches = await getAllLaunches();
-		// console.log({allLaunches});
-		expect(allLaunches).toBeInstanceOf(Array);
+	afterAll(async () => {
+		await mongoDisconnect();
+	});
+
+	describe('test launches model', () => {
+		test('allLaunches', async () => {
+			const allLaunches = await getAllLaunches();
+			// console.log({allLaunches});
+			expect(allLaunches).toBeInstanceOf(Array);
+		});
 	});
 });
