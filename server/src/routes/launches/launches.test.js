@@ -9,6 +9,8 @@ describe('Test GET /launches', () => {
 			.get('/launches')
 			.expect(200)
 			.expect('Content-Type', /json/); //assertion provided by supertest
+
+		console.log({response});
 	});
 });
 
