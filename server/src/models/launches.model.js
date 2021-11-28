@@ -5,18 +5,17 @@ const planets = require('./planets.mongo');
 
 const DEFAULT_FLIGHT_NUMBER = 100;
 
-const launch = {
-	flightNumber: 100, // =flight_number in SPACEX API res object
-	launchDate: new Date('28 Dec 2030'), // =date_local in SPACEX API res object
-	mission: 'Sample Mission', // =name in SPACEX API res object
-	rocket: 'Explorer IS1', // =rocket.name in SPACEX API res object
-	target: 'Kepler-1652 b', // does not exist in SPACEX API res object
-	customers: ['NASA', 'NOAA'], // =payload.customers for each payload in SPACEX API res object
-	upcoming: true, // =upcoming in SPACEX API res object
-	success: true, // =success in SPACEX API res object
-};
-
-saveLaunch(launch);
+// const launch = {
+// 	flightNumber: 100, // =flight_number in SPACEX API res object
+// 	launchDate: new Date('28 Dec 2030'), // =date_local in SPACEX API res object
+// 	mission: 'Sample Mission', // =name in SPACEX API res object
+// 	rocket: 'Explorer IS1', // =rocket.name in SPACEX API res object
+// 	target: 'Kepler-1652 b', // does not exist in SPACEX API res object
+// 	customers: ['NASA', 'NOAA'], // =payload.customers for each payload in SPACEX API res object
+// 	upcoming: true, // =upcoming in SPACEX API res object
+// 	success: true, // =success in SPACEX API res object
+// };
+// saveLaunch(launch);
 
 const SPACEX_API_URL = 'https://api.spacexdata.com/v4/launches/query';
 
@@ -104,7 +103,11 @@ async function getLatestFlightNumber() {
 }
 
 async function getAllLaunches(skip, limit) {
-	return await launchesDatabase.find({}, {_id: 0, __v: 0}).skip(skip).limit(limit);
+	return await launchesDatabase
+		.find({}, {_id: 0, __v: 0})
+		.sort({flightNumber: 1})
+		.skip(skip)
+		.limit(limit);
 }
 
 async function saveLaunch(launch) {
