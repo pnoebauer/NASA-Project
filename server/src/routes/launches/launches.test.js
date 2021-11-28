@@ -22,7 +22,6 @@ describe('Launches API', () => {
 				.get('/v1/launches')
 				.expect(200)
 				.expect('Content-Type', /json/); //assertion provided by supertest
-
 			// console.log({response});
 		});
 	});

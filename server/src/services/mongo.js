@@ -19,10 +19,10 @@ async function mongoConnect() {
 }
 
 async function mongoDisconnect() {
-	// console.log('shutting down');
+	console.log('shutting down');
 	await mongoose.disconnect();
-	// await new Promise(resolve => setTimeout(() => resolve(), 500));
-	// await mongoose.connection.close();
+	await new Promise(resolve => setTimeout(() => resolve(), 500));
+	await mongoose.connection.close();
 }
 
 module.exports = {mongoConnect, mongoDisconnect};
