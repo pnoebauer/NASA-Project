@@ -41,7 +41,22 @@ async function loadLaunchesData() {
 		},
 	});
 
-	console.log({res: res.data});
+	const launchDocs = res.data.docs;
+	for (const launchDoc of launchDocs) {
+		const payloads = launchDoc.payloads;
+		const customers = payloads.flatMap(payload => payload.customers);
+
+		const launch = {
+			flightNumber: launchDoc.flight_number,
+			mission: launchDoc.name,
+			rocket: launchDoc.rocket.name,
+			launchDate: launchDoc.date_local,
+			upcoming: launchDoc.upcoming,
+			success: launchDoc.success,
+			customers,
+		};
+		console.log(launch.flightNumber, launch.mission);
+	}
 }
 
 async function existsLaunchWithId(launchId) {
