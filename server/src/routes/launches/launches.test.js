@@ -12,12 +12,12 @@ describe('Launches API', () => {
 		await mongoDisconnect();
 	});
 
-	describe('Test GET /launches', () => {
+	describe('Test GET /v1/launches', () => {
 		test('should respond with 200 success', async () => {
-			// const response = await request(app).get('/launches');
+			// const response = await request(app).get('/v1/launches');
 			// expect(response.statusCode).toBe(200);
 			const response = await request(app)
-				.get('/launches')
+				.get('/v1/launches')
 				.expect(200)
 				.expect('Content-Type', /json/); //assertion provided by supertest
 
@@ -25,7 +25,7 @@ describe('Launches API', () => {
 		});
 	});
 
-	describe('Test POST /launches', () => {
+	describe('Test POST /v1/launches', () => {
 		test('should respond with 201 created', async () => {
 			const launchWithoutDate = {
 				mission: 'USS Enterprice',
@@ -35,7 +35,7 @@ describe('Launches API', () => {
 			const launch = {...launchWithoutDate, launchDate: '3 Jan 2028'};
 
 			const response = await request(app)
-				.post('/launches')
+				.post('/v1/launches')
 				.send(launch)
 				.expect('Content-Type', /json/)
 				.expect(201);
@@ -69,7 +69,7 @@ describe('Launches API', () => {
 				launchDate: '3 Jan 2028',
 			};
 			const response = await request(app)
-				.post('/launches')
+				.post('/v1/launches')
 				.send(launch)
 				.expect('Content-Type', /json/)
 				.expect(400)
@@ -85,7 +85,7 @@ describe('Launches API', () => {
 				launchDate: 'hello',
 			};
 			const response = await request(app)
-				.post('/launches')
+				.post('/v1/launches')
 				.send(launch)
 				.expect('Content-Type', /json/)
 				.expect(400)

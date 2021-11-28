@@ -1,11 +1,9 @@
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
-
 const morgan = require('morgan');
 
-const {planetsRouter} = require('./routes/planets/planets.router');
-const {launchesRouter} = require('./routes/launches/launches.router');
+const api = require('./routes/api');
 
 const app = express();
 
@@ -17,8 +15,8 @@ app.use(
 );
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '..', 'public'))); //serves public folder (e.g. index.html on /index.html)
-app.use('/planets', planetsRouter);
-app.use('/launches', launchesRouter);
+
+app.use('/v1', api);
 
 // serves everything where requested route is not setup on express
 // app.use((req, res) => {
