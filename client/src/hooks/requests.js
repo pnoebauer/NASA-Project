@@ -1,4 +1,5 @@
-const API_URL = 'http://localhost:8000/v1';
+// const API_URL = 'http://localhost:8000/v1'; //absolute path
+const API_URL = 'v1'; //path relative to origin
 
 // Load planets and return as JSON.
 async function httpGetPlanets() {
